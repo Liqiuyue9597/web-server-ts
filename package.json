@@ -1,0 +1,15 @@
+{
+  "name": "my-web-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "npm install -g typescript ts-node nodemon mysql2 && npm install"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.5.1"
+  }
+}
