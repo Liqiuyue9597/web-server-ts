@@ -1,18 +1,18 @@
-import { IncomingMessage, ServerResponse, createServer } from "http"
+import { IncomingMessage, ServerResponse, createServer } from "http";
 
-interface Page {
+export interface Page {
   page(response: ServerResponse): void;
 }
 
 class First implements Page {
   page(response: ServerResponse): void {
-      response.end("I am first page.");
+    response.end("I am first page.");
   }
 }
 
 class Root implements Page {
   page(response: ServerResponse): void {
-      response.end("I am main page.");
+    response.end("I am main page.");
   }
 }
 
@@ -22,10 +22,12 @@ router.set("/main", new Root());
 
 
 const server = createServer((req: IncomingMessage, resp: ServerResponse) => {
-  console.log('http://localhost:3000')
-  if (req.url === "/first") {
-    resp.end("I am first page.");
-  } else {
-    resp.end("I am main page.");
+  console.log('http://localhost:3000');
+  let page = router.get(req.url === undefined ? "" : req.url);
+  if (page === undefined) {
+    page = new Root();
   }
-}).listen(3000)
+
+  page.page(resp);
+
+}).listen(3000);
